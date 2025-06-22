@@ -67,7 +67,7 @@ def call_openrouter(prompt: str, system_prompt: str) -> str:
             "Content-Type": "application/json"
         }
         data = {
-            "model": "openai/gpt-3.5-turbo",
+            "model": "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
             "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": prompt}
