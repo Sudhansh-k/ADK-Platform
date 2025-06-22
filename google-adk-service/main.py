@@ -119,6 +119,18 @@ async def health_check():
     """Health check endpoint."""
     return {"status": "healthy", "service": "multi-agent-platform"}
 
+@app.get("/debug-key")
+async def debug_key():
+    """Temporarily endpoint to debug the API key."""
+    key = os.getenv('OPENROUTER_API_KEY', '')
+    if len(key) > 10:
+        return {
+            "start_of_key": key[:6],
+            "end_of_key": key[-4:],
+            "key_length": len(key)
+        }
+    return {"error": "API key not found or too short."}
+
 if __name__ == "__main__":
     import uvicorn
     
