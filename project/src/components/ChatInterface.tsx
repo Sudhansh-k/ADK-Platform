@@ -6,6 +6,8 @@ interface Message {
   sender: 'user' | 'agent';
 }
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8009';
+
 const ChatInterface: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -34,7 +36,7 @@ const ChatInterface: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8009/invoke_agent', {
+      const response = await fetch(`${API_URL}/invoke_agent`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

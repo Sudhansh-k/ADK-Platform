@@ -12,6 +12,9 @@ import Security from '../components/Security';
 import DataSources from '../components/DataSources';
 import NotificationsPage from '../components/NotificationsPage';
 import { MessageSquare } from 'lucide-react';
+import { AgentProvider, useAgent } from '../context/AgentContext';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8009';
 
 const Dashboard: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -39,7 +42,7 @@ const Dashboard: React.FC = () => {
     setChatInput('');
     setChatLoading(true);
     try {
-      const res = await fetch('http://localhost:8009/invoke_agent', {
+      const res = await fetch(`${API_URL}/invoke_agent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
